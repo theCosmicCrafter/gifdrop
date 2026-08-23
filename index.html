@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>GifDrop</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <main class="app">
+      <header>
+        <h1>GifDrop</h1>
+        <p class="tagline">Movie to GIF / APNG, dropped right where it lives.</p>
+      </header>
+
+      <section id="drop-zone" class="drop-zone">
+        <div class="drop-icon">DROP</div>
+        <p class="drop-label">Drop a movie file here or click to browse</p>
+        <p class="drop-hint">mp4, mov, avi, mkv — anything ffmpeg can read</p>
+      </section>
+
+      <section id="panel" class="panel hidden">
+        <div class="file-row">
+          <span id="file-name" class="file-name"></span>
+          <span id="file-meta" class="file-meta"></span>
+        </div>
+
+        <div class="preview-row">
+          <div class="preview">
+            <p class="preview-label">Source</p>
+            <video id="source-preview" class="preview-media" controls muted loop></video>
+          </div>
+          <div class="preview">
+            <p class="preview-label">Output</p>
+            <img id="output-preview" class="preview-media hidden" alt="Output preview" />
+            <p id="output-placeholder" class="preview-placeholder">Convert to see preview</p>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="field">
+            <label>Output</label>
+            <div class="segmented" id="format-select">
+              <button class="segment active" data-value="gif">GIF</button>
+              <button class="segment" data-value="apng">APNG</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fps-input">FPS</label>
+            <input id="fps-input" type="number" step="0.01" min="1" value="30" />
+          </div>
+
+          <div class="field">
+            <label for="max-width-input">Max width <small>(0 = no limit)</small></label>
+            <input id="max-width-input" type="number" min="0" step="1" value="0" />
+          </div>
+        </div>
+
+        <button id="convert-btn" class="convert-btn">Convert</button>
+
+        <div id="progress" class="progress hidden">
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="progress-info">
+            <span id="progress-status">Ready</span>
+            <span id="progress-percent">0%</span>
+          </div>
+        </div>
+
+        <div id="result" class="result hidden">
+          <p class="result-label">Saved to</p>
+          <p id="output-path" class="output-path"></p>
+          <button id="open-btn" class="open-btn">Open folder</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
